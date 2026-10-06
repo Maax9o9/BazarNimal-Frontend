@@ -1,0 +1,67 @@
+@import 'tailwindcss';
+
+/* Tokens de la colección "BazarNimal / Color" de Figma (modo Light). */
+@theme {
+  --color-beige-50: #fbf7f0;
+  --color-beige-100: #f5ede0;
+  --color-beige-200: #eadbc4;
+  --color-beige-300: #dcc5a3;
+  --color-beige-400: #c9a97e;
+  --color-rojo-50: #fdf0ee;
+  --color-rojo-100: #f8dcd8;
+  --color-rojo-300: #e8968c;
+  --color-rojo-500: #c8392e;
+  --color-rojo-600: #a82e25;
+  --color-rojo-700: #86241d;
+  --color-cafe-500: #9a8475;
+  --color-cafe-700: #6b5446;
+  --color-cafe-900: #3b2a22;
+  --color-exito: #3f7d4e;
+  --color-exito-bg: #e3f0e6;
+  --color-cempasuchil: #c9771a;
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-sans: 'DM Sans', system-ui, sans-serif;
+
+  /* Estilos de texto de Figma */
+  --text-display: 3.5rem;
+  --text-display--line-height: 1.1;
+  --text-display--letter-spacing: -0.01em;
+  --text-h1: 2.5rem;
+  --text-h1--line-height: 1.15;
+  --text-h1--letter-spacing: -0.01em;
+  --text-h3: 1.25rem;
+  --text-h3--line-height: 1.3;
+  --text-h3--letter-spacing: -0.01em;
+  --text-body-l: 1.125rem;
+  --text-body-l--line-height: 1.6;
+}
+
+/* Modo "Día de Muertos": paleta invertida, solo en la sección de la ofrenda. */
+[data-theme='muertos'] {
+  --color-beige-50: #1f1612;
+  --color-beige-100: #2b1f19;
+  --color-beige-200: #3d2d24;
+  --color-beige-300: #5c4638;
+  --color-beige-400: #8a7060;
+  --color-cafe-500: #a8927f;
+  --color-cafe-700: #d9c7ae;
+  --color-cafe-900: #f5ede0;
+  --color-rojo-50: #3a1c17;
+  --color-rojo-100: #4a1f1a;
+  --color-rojo-600: #f08a7c;
+  --color-rojo-700: #f3b3a8;
+  --color-exito: #7cc48e;
+  --color-exito-bg: #1e3324;
+  --color-cempasuchil: #f2a93b;
+}
+
+body {
+  @apply bg-beige-50 font-sans text-cafe-900 antialiased;
+}
+
+/* Se oculta el "ojo" nativo de Edge (solo aparece con foco); usamos el propio de PasswordField. */
+input::-ms-reveal,
+input::-ms-clear {
+  display: none;
+}
