@@ -1,5 +1,5 @@
-export type PetSpecies = 'dog' | 'cat'
-export type PetStatus = 'in_adoption' | 'adopted'
+import type { PageRequest } from '@shared/types/pagination'
+import type { PetSort, PetSpecies, PetStatus } from '../../../common/domain/petTypes'
 
 export interface Pet {
   id: string
@@ -12,7 +12,9 @@ export interface Pet {
   status: PetStatus
 }
 
-export interface PetQuery {
-  limit: number
-  status?: PetStatus
+export interface PetQuery extends PageRequest {
+  species?: PetSpecies | ''
+  status?: PetStatus | ''
+  search?: string
+  sort?: PetSort
 }

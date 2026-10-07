@@ -1,7 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
 import { useInject } from '@core/di/useInject'
 import { applyServerErrors } from '@shared/utils/serverErrors'
 import { PASSWORD_RULES } from '@shared/validators'
@@ -13,7 +12,6 @@ export function useRegisterForm() {
   const register = useInject(AUTH_TOKENS.register)
   const login = useInject(AUTH_TOKENS.login)
   const { signIn } = useSession()
-  const navigate = useNavigate()
   const [serverError, setServerError] = useState<string | null>(null)
   const form = useForm({
     resolver: zodResolver(registerSchema),
@@ -25,9 +23,8 @@ export function useRegisterForm() {
     setServerError(null)
     try {
       await register.execute(newUser)
-      // El registro no abre sesión: se inicia con las mismas credenciales.
+      // El registro no abre sesión: se inicia con las mismas credenciales (GuestGuard redirige).
       signIn(await login.execute({ email: newUser.email, password: newUser.password }))
-      navigate('/', { replace: true })
     } catch (error) {
       setServerError(applyServerErrors(error, ['name', 'email', 'phone', 'password'], form.setError))
     }

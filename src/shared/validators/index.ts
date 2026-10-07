@@ -36,6 +36,19 @@ export const personNameSchema = z
   .max(100, 'Máximo 100 caracteres')
   .regex(NAME_RE, 'Solo letras, espacios, apóstrofos, puntos y guiones')
 
+/** Imágenes: mismos tipos y tamaño máximo que acepta el backend. */
+export const IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp']
+export const MAX_IMAGE_MB = 5
+
+export const imageSchema = z
+  .instanceof(File, { error: 'Selecciona una imagen' })
+  .refine((file) => IMAGE_TYPES.includes(file.type), 'Solo se permiten imágenes JPG, PNG o WEBP')
+  .refine((file) => file.size <= MAX_IMAGE_MB * 1024 * 1024, `La imagen debe pesar máximo ${MAX_IMAGE_MB} MB`)
+
+/** Texto libre requerido: se recorta y se limita su longitud. */
+export const requiredText = (max: number, empty = 'Este campo es obligatorio') =>
+  z.string().trim().min(1, empty).max(max, `Máximo ${max} caracteres`)
+
 export const phoneSchema = z
   .string()
   .overwrite((value) => value.replace(/[\s\-()]/g, ''))

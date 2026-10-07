@@ -1,11 +1,12 @@
-import cempasuchil from '../assets/banderin-cempasuchil.svg'
-import rojo from '../assets/banderin-rojo.svg'
-import rosa from '../assets/banderin-rosa.svg'
-import verde from '../assets/banderin-verde.svg'
+import cempasuchil from '@assets/papel-picado/banderin-cempasuchil.svg'
+import rojo from '@assets/papel-picado/banderin-rojo.svg'
+import rosa from '@assets/papel-picado/banderin-rosa.svg'
+import verde from '@assets/papel-picado/banderin-verde.svg'
 
 // Mismo ciclo de colores que en Figma.
 const CYCLE = [cempasuchil, rosa, rojo, verde, cempasuchil, rosa]
-const FLAGS = 27
+// Suficientes banderines para cubrir pantallas de hasta ~2900 px; el contenedor recorta el sobrante.
+const FLAGS = 64
 
 export function PapelPicado() {
   return (

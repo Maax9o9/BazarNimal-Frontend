@@ -1,28 +1,33 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
+import { errorMessage } from '@shared/utils/errorMessage'
 
 export type AsyncState<T> =
   | { status: 'loading' }
   | { status: 'success'; data: T }
   | { status: 'error'; message: string }
 
-/** Ejecuta una carga al montar y expone los estados de carga, éxito y error. */
-export function useAsync<T>(load: () => Promise<T>): AsyncState<T> {
-  const [state, setState] = useState<AsyncState<T>>({ status: 'loading' })
+type Settled<T> = Exclude<AsyncState<T>, { status: 'loading' }>
+
+/** Carga datos y vuelve a cargar cuando cambian `deps` (valores serializables) o al llamar `reload`. */
+export function useAsync<T>(load: () => Promise<T>, deps: unknown[] = []) {
+  const [reloads, setReloads] = useState(0)
+  const key = JSON.stringify([deps, reloads])
+  const [result, setResult] = useState<{ key: string; state: Settled<T> } | null>(null)
 
   useEffect(() => {
     let active = true
-    load()
-      .then((data) => active && setState({ status: 'success', data }))
-      .catch((error: unknown) => {
-        const message = error instanceof Error ? error.message : 'No se pudo cargar la información.'
-        if (active) setState({ status: 'error', message })
-      })
+    load().then(
+      (data) => active && setResult({ key, state: { status: 'success', data } }),
+      (error: unknown) => active && setResult({ key, state: { status: 'error', message: errorMessage(error) } }),
+    )
     return () => {
       active = false
     }
-    // La carga se ejecuta una sola vez al montar.
+    // `key` resume las dependencias de la carga.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [key])
 
-  return state
+  const reload = useCallback(() => setReloads((n) => n + 1), [])
+  const state: AsyncState<T> = result?.key === key ? result.state : { status: 'loading' }
+  return { state, reload }
 }

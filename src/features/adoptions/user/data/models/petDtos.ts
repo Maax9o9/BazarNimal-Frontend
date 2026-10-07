@@ -1,15 +1,20 @@
+import type { ReviewStatus } from '@shared/constants/reviewStatus'
+import type { PetSpecies, PetStatus } from '../../../common/domain/petTypes'
+
 export interface PetDto {
   id: string
   name: string
-  species: 'dog' | 'cat'
+  species: PetSpecies
   breed: string
   age_years: number
   age_months: number
   image_url: string | null
-  status: 'in_adoption' | 'adopted'
+  status: PetStatus
 }
 
-export interface PetListParamsDto {
-  limit: number
-  status?: 'in_adoption' | 'adopted'
+export interface MyAdoptionRequestDto {
+  id: string
+  status: ReviewStatus
+  pet: { id: string; name: string; species: PetSpecies; image_url: string | null }
+  created_at: string
 }

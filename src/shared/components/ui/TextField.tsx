@@ -32,7 +32,7 @@ export function TextField({ label, error, hint, invalid, trailing, footer, foote
           id={inputId}
           aria-invalid={hasError}
           aria-describedby={describedBy}
-          className={`w-full rounded-xl border-[1.5px] bg-white px-4 py-3 leading-[1.6] outline-none transition-colors placeholder:text-cafe-500 focus:border-rojo-500 ${
+          className={`w-full rounded-xl border-[1.5px] bg-field px-4 py-3 leading-[1.6] outline-none transition-colors placeholder:text-cafe-500 focus:border-rojo-500 ${
             hasError ? 'border-rojo-500' : 'border-beige-300'
           } ${trailing ? 'pr-12' : ''}`}
           {...props}

@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from '@shared/components/ui/Link'
 import { Logo } from '@shared/components/ui/Logo'
 
 type AuthLayoutProps = {
@@ -12,8 +12,9 @@ type AuthLayoutProps = {
 export function AuthLayout({ title, subtitle, alternative, children }: AuthLayoutProps) {
   return (
     <div className="flex min-h-screen">
-      <aside className="hidden w-[600px] shrink-0 flex-col justify-between bg-rojo-500 px-16 py-14 lg:flex">
-        <Link to="/" aria-label="BazarNimal, inicio" className="self-start">
+      {/* Rejilla 1fr · auto · 1fr: el mensaje queda centrado en la altura del panel sin importar el logo. */}
+      <aside className="sticky top-0 hidden h-screen w-[600px] shrink-0 grid-rows-[1fr_auto_1fr] bg-rojo-500 px-16 py-14 lg:grid">
+        <Link to="/" aria-label="BazarNimal, inicio" className="self-start justify-self-start">
           <Logo variant="negative" size="lg" />
         </Link>
         <div className="flex flex-col gap-4">
@@ -22,7 +23,6 @@ export function AuthLayout({ title, subtitle, alternative, children }: AuthLayou
             Crea tu cuenta para solicitar una adopción o compartir un recuerdo en la ofrenda.
           </p>
         </div>
-        <span />
       </aside>
 
       <main className="flex flex-1 items-center justify-center px-4 py-12">

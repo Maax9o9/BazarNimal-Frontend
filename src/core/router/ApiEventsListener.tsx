@@ -25,10 +25,9 @@ export function ApiEventsListener() {
       apiEvents.subscribe((event) => {
         if (event.type === 'unauthorized') {
           clear()
-          navigate('/login', { replace: true })
+          navigate('/login', { replace: true, viewTransition: true })
         }
-        // Mientras no exista la vista de "acceso denegado", se regresa al inicio.
-        if (event.type === 'forbidden') navigate('/', { replace: true })
+        if (event.type === 'forbidden') navigate('/acceso-denegado', { replace: true, viewTransition: true })
         setNotice(noticeFor(event))
       }),
     [clear, navigate],

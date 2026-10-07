@@ -1,5 +1,5 @@
-import gato from '@shared/assets/logo/gato.svg'
-import perro from '@shared/assets/logo/perro.svg'
+import gato from '@assets/logo/gato.svg'
+import perro from '@assets/logo/perro.svg'
 
 /** Isotipo: perro y gato en pixel art sobre el cuadro rojo (proporciones del componente de Figma). */
 export function LogoIcon({ size = 48, className = '' }: { size?: number; className?: string }) {

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from '@shared/components/ui/Link'
 import { Alert } from '@shared/components/ui/Alert'
 import { Button } from '@shared/components/ui/Button'
 import { PasswordField } from '@shared/components/ui/PasswordField'

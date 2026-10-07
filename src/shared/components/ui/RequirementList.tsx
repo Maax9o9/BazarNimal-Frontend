@@ -1,3 +1,6 @@
+import palomita from '@assets/icons/palomita.svg'
+import { Icon } from './Icon'
+
 export interface Requirement {
   label: string
   met: boolean
@@ -24,11 +27,7 @@ export function RequirementList({ id, items, showErrors = false }: Props) {
                 met ? 'border-exito bg-exito text-white' : 'border-current'
               }`}
             >
-              {met && (
-                <svg viewBox="0 0 12 12" className="size-2.5" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M2.5 6.5 5 9l4.5-6" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              )}
+              {met && <Icon src={palomita} className="size-2.5" />}
             </span>
             {label}
             <span className="sr-only">{met ? '(cumplido)' : '(pendiente)'}</span>
