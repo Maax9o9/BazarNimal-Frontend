@@ -26,3 +26,6 @@ docs/
 
 CLAUDE.md
 .claude/
+
+# Documentación en Markdown (no se sube al repo)
+*.md

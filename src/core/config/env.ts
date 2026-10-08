@@ -1,9 +1,8 @@
-const required = (key: string, value: string | undefined): string => {
-  if (!value) throw new Error(`Falta la variable de entorno ${key}`)
-  return value
-}
-
 export const env = {
-  apiBaseUrl: required('VITE_API_BASE_URL', import.meta.env.VITE_API_BASE_URL),
+  /**
+   * Por defecto la API se pide al mismo origen (`/api/v1`): en desarrollo la reenvía el proxy de Vite
+   * y en Vercel el rewrite de `vercel.json`. Así viajan las cookies HttpOnly con SameSite=Strict.
+   */
+  apiBaseUrl: import.meta.env.VITE_API_BASE_URL || '/api/v1',
   apiTimeoutMs: 10_000,
 } as const
